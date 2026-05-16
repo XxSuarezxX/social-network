@@ -3,10 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from services.user import UserService
 from schemas.user import UserCreate, UserResponse
 from core.database import get_db
+from core.security import get_current_user
 
-router = APIRouter()
+router = APIRouter(prefix="/users", tags=["Users"])
 
-@router.post("/register", response_model=UserResponse)
+@router.post("/", response_model=UserResponse)
 async def register(user : UserCreate, db: AsyncSession = Depends(get_db)):
     user_service = UserService(db)
 
@@ -19,3 +20,14 @@ async def register(user : UserCreate, db: AsyncSession = Depends(get_db)):
     
     new_user = await user_service.create_user(user)
     return new_user
+
+@router.get("/me", response_model=UserResponse)
+async def get_profile(db: AsyncSession = Depends(get_db), current_user_id: str = Depends(get_current_user)):
+    user_service = UserService(db)
+    user = await user_service.get_user(current_user_id)
+
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND,
+                             detail="Usuario no encontrado")
+    return user
+        

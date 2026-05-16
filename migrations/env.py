@@ -9,12 +9,18 @@ from alembic import context
 
 import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent))
 
-from app_backend.core.config import settings
-print(f"DEBUG: La URL es {settings.database_url}")
-from app_backend.core.database import Base
-from app_backend.models.user import User
+# 1. Agregamos la raíz y la carpeta app_backend al path de Python
+root_path = Path(__file__).parent.parent
+sys.path.append(str(root_path))
+sys.path.append(str(root_path / "app_backend"))
+
+# 2. Ahora las importaciones deberían funcionar sin el prefijo app_backend
+# (Usa el mismo estilo que tengas en tus archivos de la app)
+from core.config import settings
+from core.database import Base
+from models.user import User  # Asegúrate de importar todos tus modelos aquí
+from models.posts import Posts
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -8,6 +8,13 @@ class UserCreate(BaseModel):
 
 class UserResponse(BaseModel):
     id : UUID
-    email : str
+    email : EmailStr
     username : str
-    
+    full_name: str | None = None
+    bio: str | None = None
+    profile_picture: str | None = None
+
+class UserUpdate(BaseModel):
+    full_name: str | None = None
+    bio: str | None = None
+    profile_picture: str | None = None

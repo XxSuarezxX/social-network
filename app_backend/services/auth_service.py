@@ -2,7 +2,6 @@ from services.user import UserService
 from core.security import create_access_token, verify_password
 from schemas.userLogin import UserLogin
 
-
 class AuthService:
 
     def __init__(self, user_service: UserService):
