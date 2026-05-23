@@ -12,7 +12,7 @@ def get_auth_service(db: AsyncSession = Depends(get_db)):
     user_service = UserService(db)
     return AuthService(user_service)
 
-@router.post("/")
+@router.post("/login")
 async def login(data: UserLogin, auth_service: AuthService = Depends(get_auth_service)):
     user = await auth_service.login_auth(data)
 

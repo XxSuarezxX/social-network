@@ -39,8 +39,12 @@ loginForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             messageDiv.classList.add('text-blue-600');
             messageDiv.innerText = "¡Login exitoso!";
-            console.log("Access Token:", data.access_token);
-            // El token ya está en tus manos para el siguiente módulo
+
+            localStorage.setItem('token', data.access_token);
+
+            setTimeout(() => {
+                window.location.href = '/user/profile/profile.html';
+            }, 1000);
         } else {
             messageDiv.classList.add('text-red-600');
             messageDiv.innerText = data.detail || "Error en el login";

@@ -25,7 +25,7 @@ registerForm.addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/users/register', { // Ajusta según tu ruta
+        const response = await fetch('http://127.0.0.1:8000/users/', { // Ajusta según tu ruta
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })

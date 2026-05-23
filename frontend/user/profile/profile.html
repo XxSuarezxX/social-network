@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | DevConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- NAVBAR SUPERIOR -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            
+            <!-- Izquierda: Logo y Home -->
+            <div class="flex items-center gap-4">
+                <div class="bg-blue-600 p-1.5 rounded-lg flex-shrink-0">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors" title="Inicio">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+                </a>
+            </div>
+
+            <!-- Centro: Barra de Búsqueda -->
+            <div class="flex-1 max-w-md mx-4">
+                <div class="relative">
+                    <input type="text" placeholder="Buscar en DevConnect..." class="w-full bg-gray-100 border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-blue-500 text-sm">
+                    <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+            </div>
+
+            <!-- Derecha: Solicitudes, Notificaciones y Salir -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full relative" title="Solicitudes de amistad">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <span class="absolute top-1 right-1 bg-red-500 text-white text-[10px] px-1 rounded-full">2</span>
+                </button>
+                
+                <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-full relative" title="Notificaciones">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                    <span class="absolute top-1 right-1 bg-red-500 text-white text-[10px] px-1 rounded-full">5</span>
+                </button>
+
+                <div class="h-8 w-[1px] bg-gray-200 mx-1"></div>
+
+                <button onclick="cerrarSesion()" class="flex items-center gap-1 text-gray-500 hover:text-red-600 transition-colors" title="Cerrar Sesión">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    <span class="text-sm font-semibold hidden md:inline">Salir</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-5xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- COLUMNA IZQUIERDA: Información Personal -->
+            <div class="md:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex flex-col items-center text-center border-b border-gray-100 pb-4 mb-4">
+                        <img id="userAvatar" src="https://via.placeholder.com/150" alt="Avatar" class="w-24 h-24 rounded-full object-cover border-2 border-blue-500 mb-3">
+                        <h2 id="userFullName" class="text-xl font-bold text-gray-800">Cargando...</h2>
+                        <p id="userUsername" class="text-sm text-gray-500">@username</p>
+                    </div>
+
+                    <div class="space-y-3 text-sm">
+                        <div>
+                            <span class="font-semibold text-gray-700 block">Biografía</span>
+                            <p id="userBio" class="text-gray-600 italic text-pretty">Sin biografía aún.</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-gray-700 block text-xs uppercase tracking-wider text-gray-400 mt-2">Contacto</span>
+                            <p id="userEmail" class="text-gray-600 truncate">...</p>
+                        </div>
+                        <div>
+                            <span class="font-semibold text-gray-700 block text-xs uppercase tracking-wider text-gray-400 mt-2">Comunidad</span>
+                            <p id="userDate" class="text-gray-600">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: Muro y CRUD de Posts -->
+            <div class="md:col-span-2 space-y-6">
+                
+                <!-- 1. CAJA PARA CREAR POST -->
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+                        </div>
+                        <h3 class="text-sm font-semibold text-gray-700">Nueva publicación</h3>
+                    </div>
+                    
+                    <textarea id="postContent" rows="3" placeholder="¿Qué estás pensando?" 
+                        class="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white resize-none text-gray-700 text-sm transition-all"></textarea>
+                    
+                    <div class="flex justify-end mt-2 border-t border-gray-100 pt-3">
+                        <button id="btnPublish" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-lg text-sm transition-all shadow-md active:transform active:scale-95">
+                            Publicar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. CONTENEDOR DE PUBLICACIONES -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center justify-between mb-6">
+                        <h1 class="text-xl font-bold text-gray-800">Mis Publicaciones</h1>
+                        <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase">Recientes</span>
+                    </div>
+                    
+                    <div id="postsContainer" class="space-y-4">
+                        <!-- Shimmer / Cargando -->
+                        <div class="animate-pulse flex space-x-4">
+                            <div class="flex-1 space-y-4 py-1">
+                                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                                <div class="space-y-2">
+                                    <div class="h-4 bg-gray-200 rounded"></div>
+                                    <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+</html>

@@ -21,6 +21,4 @@ class PostResponse(BaseModel):
         from_attributes = True
 
 class PostToUpdate(BaseModel):
-    id : UUID
     content : str = Field(..., min_length=1, max_length=200)
-

@@ -9,9 +9,11 @@ app = FastAPI()
 # Configuración de Orígenes permitidos
 # Aquí defines quién tiene permiso para consumir tu API
 origins = [
-    "http://127.0.0.1:8080",  # Dirección estándar de Live Server
+    "http://127.0.0.1:8080",
     "http://localhost:8080",
-    "http://127.0.0.1:5500"
+    "http://127.0.0.1:5500",
+    "http://127.0.0.1:3000", # Puerto de npx serve
+    "http://localhost:3000",  # Puerto de npx serve (alias)
 ]
 
 # Agregamos el middleware a la aplicación
